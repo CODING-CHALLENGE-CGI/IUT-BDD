@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using Microsoft.Data.Sqlite;
 using Persistance.Models;
 
@@ -6,7 +8,9 @@ namespace RecuperateDatas
 {
     public static class GetDatas
     {
-
+        private static string sqlitePath = Path.Combine(
+       Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+       @"StarWars.db");
 
         /// <summary>
         /// On attend ici d'avoir le nom d'un personnage. 
@@ -15,11 +19,11 @@ namespace RecuperateDatas
         /// <returns></returns>  
         public static List<string> GetName()
         {
-
+            
 
             List<string> names = new List<string>();
 
-            using (var connection = new SqliteConnection("Data Source=StarWars.db"))
+            using (var connection = new SqliteConnection("Data Source=" + sqlitePath))
             {
                 connection.Open();
 
@@ -47,7 +51,7 @@ namespace RecuperateDatas
         {
             List<string> names = new List<string>();
 
-            using (var connection = new SqliteConnection("Data Source=StarWars.db"))
+            using (var connection = new SqliteConnection("Data Source=" + sqlitePath))
             {
                 connection.Open();
 
@@ -78,7 +82,7 @@ namespace RecuperateDatas
         {
             List<HomePlanetCharacter> homePlanetsCaharacters = new List<HomePlanetCharacter>();
 
-            using (var connection = new SqliteConnection("Data Source=StarWars.db"))
+            using (var connection = new SqliteConnection("Data Source=" + sqlitePath))
             {
                 connection.Open();
 
@@ -111,7 +115,7 @@ namespace RecuperateDatas
         {
             List<HomePlanetCharacter> homePlanetsCaharacters = new List<HomePlanetCharacter>();
 
-            using (var connection = new SqliteConnection("Data Source=StarWars.db"))
+            using (var connection = new SqliteConnection("Data Source=" + sqlitePath))
             {
                 connection.Open();
 
@@ -144,7 +148,7 @@ namespace RecuperateDatas
         {
             List<CharacterFromEpisode> characterEpisodes = new List<CharacterFromEpisode>();
 
-            using (var connection = new SqliteConnection("Data Source=StarWars.db"))
+            using (var connection = new SqliteConnection("Data Source=" + sqlitePath))
             {
                 connection.Open();
 
@@ -185,7 +189,7 @@ namespace RecuperateDatas
         {
             List<CharacterFromEpisode> characterEpisodes = new List<CharacterFromEpisode>();
 
-            using (var connection = new SqliteConnection("Data Source=StarWars.db"))
+            using (var connection = new SqliteConnection("Data Source=" + sqlitePath))
             {
                 connection.Open();
 
@@ -220,15 +224,48 @@ namespace RecuperateDatas
             return characterEpisodes;
         }
 
-
         /*
-        public IQueryable GetCharacterFriends()
-        {
-            dbContext = from cf in dbContext.Set<CharacterFriend>()
 
-        }
-        
-        */
+        public static List<CharacterFromEpisode> GetCharacterEpisodesCorrected()
+        {
+            List<CharacterFromEpisode> characterEpisodes = new List<CharacterFromEpisode>();
+
+            using (var connection = new SqliteConnection("Data Source=StarWars.db"))
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                command.CommandText =
+                @"
+                SELECT
+                c.Name,
+                ce.EpisodeId
+                FROM Characters c
+                INNER JOIN CharacterEpisodes ce
+                ON c.Id = ce.CharacterId
+                Inner JOIN Episodes e
+                ON ce.EpisodeId = e.Id
+                Group by c.Name,
+                e.ID
+                HAVING ce.EpisodeId = 5";
+
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        characterEpisodes.Add(new CharacterFromEpisode(reader.GetString(0), int.Parse(reader.GetString(1))));
+                    }
+                }
+                connection.Close();
+            }
+
+
+
+            return characterEpisodes;
+        }*/
+
+
 
     }
 }

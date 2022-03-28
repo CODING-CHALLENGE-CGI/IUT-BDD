@@ -4,10 +4,7 @@ using RecuperateDatas;
 namespace IUTBDD_Benchmark
 {
     public class BenchClass
-    {
-
-       
-               
+    {                      
 
         [Benchmark]
         public void GetName()
@@ -21,7 +18,6 @@ namespace IUTBDD_Benchmark
         public void GetNameCorrected()
         {
             GetDatas.GetNameCorrected();
-
         }
 
         [Benchmark]

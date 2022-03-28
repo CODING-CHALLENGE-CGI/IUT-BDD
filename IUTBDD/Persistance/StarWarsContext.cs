@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging;
 using Persistance.Models;
-
-
+using System;
+using System.IO;
 
 namespace Persistance
 {
@@ -19,7 +19,11 @@ namespace Persistance
 
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlite("Data Source=StarWars.db");
+            var sqlitePath = Path.Combine(
+       Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+       @"StarWars.db");
+
+            optionsBuilder.UseSqlite("Data Source="+sqlitePath);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

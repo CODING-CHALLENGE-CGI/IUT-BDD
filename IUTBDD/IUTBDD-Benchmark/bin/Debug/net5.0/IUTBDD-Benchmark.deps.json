@@ -9,7 +9,7 @@
       "IUTBDD-Benchmark/1.0.0": {
         "dependencies": {
           "BenchmarkDotNet": "0.13.1",
-          "Persistance": "1.0.0"
+          "RecuperateDatas": "1.0.0"
         },
         "runtime": {
           "IUTBDD-Benchmark.dll": {}
@@ -1299,6 +1299,15 @@
         "runtime": {
           "Persistance.dll": {}
         }
+      },
+      "RecuperateDatas/1.0.0": {
+        "dependencies": {
+          "Microsoft.Data.Sqlite.Core": "6.0.3",
+          "Persistance": "1.0.0"
+        },
+        "runtime": {
+          "RecuperateDatas.dll": {}
+        }
       }
     }
   },
@@ -2156,6 +2165,11 @@
       "hashPath": "system.xml.xpath.xdocument.4.3.0.nupkg.sha512"
     },
     "Persistance/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RecuperateDatas/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

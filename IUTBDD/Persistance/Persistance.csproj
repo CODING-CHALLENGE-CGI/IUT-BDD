@@ -13,6 +13,7 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Scripts\Character.sql" />
     <None Remove="Scripts\CharactersEpisodeV - corrige.sql" />
     <None Remove="Scripts\CharactersEpisodeV.sql" />
     <None Remove="Scripts\HomePlanet - corrige.sql" />

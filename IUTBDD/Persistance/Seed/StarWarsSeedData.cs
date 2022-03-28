@@ -98,6 +98,8 @@ namespace Persistance.Seed
                     new CharacterEpisode { Episode = newhope }
                 },
             };
+            
+
             var humans = new List<Human>
             {
                 luke,
@@ -106,11 +108,29 @@ namespace Persistance.Seed
                 leia,
                 tarkin
             };
+
+            for (int i = 10000; i < 50000; i++)
+            {
+                humans.Add(new Human
+                {
+                    Id = i,
+                    Name = "Unknown jedis",
+                    CharacterEpisodes = new List<CharacterEpisode>
+                {
+                    new CharacterEpisode { Episode = newhope }
+                },
+                    HomePlanet = alderaan,
+                });
+            }
             if (!db.Humans.Any())
             {
                 db.Humans.AddRange(humans);
                 db.SaveChanges();
             }
+
+            
+
+
 
             // droids
             var threepio = new Droid
