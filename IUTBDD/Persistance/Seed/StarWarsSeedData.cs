@@ -109,7 +109,7 @@ namespace Persistance.Seed
                 tarkin
             };
 
-            for (int i = 10000; i < 50000; i++)
+            for (int i = 10000; i < 110000; i++)
             {
                 humans.Add(new Human
                 {
@@ -119,8 +119,8 @@ namespace Persistance.Seed
                 {
                     new CharacterEpisode { Episode = newhope }
                 },
-                    HomePlanet = alderaan,
-                });
+                    HomePlanet = new Planet { Id = i, Name = "Unknown Planet" }
+            });
             }
             if (!db.Humans.Any())
             {

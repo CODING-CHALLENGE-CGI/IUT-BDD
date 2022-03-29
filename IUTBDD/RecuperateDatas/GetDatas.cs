@@ -14,7 +14,6 @@ namespace RecuperateDatas
 
         /// <summary>
         /// On attend ici d'avoir le nom d'un personnage. 
-        /// La méthode actuellement utlisée ne serait-elle pas un peu trop brutale ?
         /// </summary>
         /// <returns></returns>  
         public static List<string> GetName()
@@ -75,8 +74,7 @@ namespace RecuperateDatas
         }
 
         /// <summary>
-        /// On cherche à avoir la planete d'origine d'un habitant. On est sur une optimisation de requête.
-        /// Peut-être voir avec une jointure ? Attention on doit toujours obtenir le même résultat.
+        /// On cherche à avoir la planete d'origine d'un habitant et d'afficher son nom.
         /// </summary>
         /// <returns></returns>
         public static List<HomePlanetCharacter>  GetHomePlanet()
@@ -145,6 +143,11 @@ namespace RecuperateDatas
         }
 
 
+        /// <summary>
+        /// On veut le nom des personnages apparaissants dans l'épisode 5. On affichera aussi l'id  l'épisode en question.
+        /// </summary>
+        /// <returns></returns>
+        /// 
         public static List<CharacterFromEpisode> GetCharacterEpisodes()
         {
             List<CharacterFromEpisode> characterEpisodes = new List<CharacterFromEpisode>();
@@ -184,7 +187,7 @@ namespace RecuperateDatas
             return characterEpisodes;
         }
 
-
+        
 
         public static List<CharacterFromEpisode> GetCharacterEpisodesCorrected()
         {
@@ -234,7 +237,7 @@ namespace RecuperateDatas
         {
             List<string> characterFriend = new List<string>();
 
-            using (var connection = new SqliteConnection("Data Source=StarWars.db"))
+            using (var connection = new SqliteConnection("Data Source=" + sqlitePath))
             {
                 connection.Open();
 

@@ -5,13 +5,11 @@ namespace IUTBDD_Benchmark
 {
     public class BenchClass
     {                      
-
+        
         [Benchmark]
         public void GetName()
         {
-
             GetDatas.GetName();
-
         }
 
         [Benchmark]
@@ -19,7 +17,9 @@ namespace IUTBDD_Benchmark
         {
             GetDatas.GetNameCorrected();
         }
+       
 
+        
         [Benchmark]
         public void GetHomePlanet()
         {
@@ -31,7 +31,8 @@ namespace IUTBDD_Benchmark
         {
             GetDatas.GetHomePlanetCorrected();
         }
-
+        
+        
         [Benchmark]
         public void GetCharacterEpisodes()
         {
@@ -43,8 +44,8 @@ namespace IUTBDD_Benchmark
         {
             GetDatas.GetCharacterEpisodesCorrected();
         }
-
-
+        
+        
 
     }
 
