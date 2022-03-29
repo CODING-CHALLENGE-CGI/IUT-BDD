@@ -75,12 +75,13 @@ namespace RecuperateDatas
         }
 
         /// <summary>
-        /// On cherche à avoir la planete d'origine d'un habitant. Pas d'indice pour celui-ci ;)
+        /// On cherche à avoir la planete d'origine d'un habitant. On est sur une optimisation de requête.
+        /// Peut-être voir avec une jointure ? Attention on doit toujours obtenir le même résultat.
         /// </summary>
         /// <returns></returns>
         public static List<HomePlanetCharacter>  GetHomePlanet()
         {
-            List<HomePlanetCharacter> homePlanetsCaharacters = new List<HomePlanetCharacter>();
+            List<HomePlanetCharacter> homePlanetsCharacters = new List<HomePlanetCharacter>();
 
             using (var connection = new SqliteConnection("Data Source=" + sqlitePath))
             {
@@ -99,21 +100,21 @@ namespace RecuperateDatas
                     {
                         string home = reader.IsDBNull(reader.GetOrdinal("HomePlanetName")) ? "null" : reader.GetString(1);
 
-                        homePlanetsCaharacters.Add(new HomePlanetCharacter(reader.GetString(0),home));
+                        homePlanetsCharacters.Add(new HomePlanetCharacter(reader.GetString(0),home));
                     }
                 }
                 connection.Close();
 
             }
 
-            return homePlanetsCaharacters;
+            return homePlanetsCharacters;
         }
 
-
+        
 
         public static List<HomePlanetCharacter> GetHomePlanetCorrected()
         {
-            List<HomePlanetCharacter> homePlanetsCaharacters = new List<HomePlanetCharacter>();
+            List<HomePlanetCharacter> homePlanetsCharacters = new List<HomePlanetCharacter>();
 
             using (var connection = new SqliteConnection("Data Source=" + sqlitePath))
             {
@@ -132,7 +133,7 @@ namespace RecuperateDatas
                     {
                         string home = reader.IsDBNull(reader.GetOrdinal("HomePlanetName")) ? "null" : reader.GetString(1);
 
-                        homePlanetsCaharacters.Add(new HomePlanetCharacter(reader.GetString(0), home));
+                        homePlanetsCharacters.Add(new HomePlanetCharacter(reader.GetString(0), home));
                     }
                 }
 
@@ -140,7 +141,7 @@ namespace RecuperateDatas
 
             }
 
-            return homePlanetsCaharacters;
+            return homePlanetsCharacters;
         }
 
 
@@ -217,18 +218,21 @@ namespace RecuperateDatas
                     }
                 }
                 connection.Close();
-            }
-
-            
+            }            
 
             return characterEpisodes;
         }
 
-        /*
+        /// <summary>
+        /// Ici on a déjà une requête fonctionnelle. Seulement elle ne renvoie pas le bon nom.
+        /// On cherche l'ami de Luke Skywalker vivant sur la planète Alderaan.
+        /// Vous pouvez directement modifier la requête.
+        /// </summary>
+        /// <returns></returns>
 
-        public static List<CharacterFromEpisode> GetCharacterEpisodesCorrected()
+        public static List<string> GetCharacterFriendLuke()
         {
-            List<CharacterFromEpisode> characterEpisodes = new List<CharacterFromEpisode>();
+            List<string> characterFriend = new List<string>();
 
             using (var connection = new SqliteConnection("Data Source=StarWars.db"))
             {
@@ -238,23 +242,16 @@ namespace RecuperateDatas
                 command.CommandText =
                 @"
                 SELECT
-                c.Name,
-                ce.EpisodeId
+                c.Name
                 FROM Characters c
-                INNER JOIN CharacterEpisodes ce
-                ON c.Id = ce.CharacterId
-                Inner JOIN Episodes e
-                ON ce.EpisodeId = e.Id
-                Group by c.Name,
-                e.ID
-                HAVING ce.EpisodeId = 5";
-
+                INNER JOIN CharacterFriends cf
+                ON c.Id = cf.CharacterId";
 
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        characterEpisodes.Add(new CharacterFromEpisode(reader.GetString(0), int.Parse(reader.GetString(1))));
+                        characterFriend.Add(reader.GetString(0));
                     }
                 }
                 connection.Close();
@@ -262,8 +259,8 @@ namespace RecuperateDatas
 
 
 
-            return characterEpisodes;
-        }*/
+            return characterFriend;
+        }
 
 
 

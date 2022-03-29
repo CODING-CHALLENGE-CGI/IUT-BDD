@@ -1,7 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Persistance;
 using FluentAssertions;
-using Persistance.Seed;
 using System.Collections.Generic;
 using Persistance.Models;
 using RecuperateDatas;
@@ -42,5 +40,16 @@ namespace IUTBDDTest
             List<CharacterFromEpisode> characterFromEpisodesCorrected = GetDatas.GetCharacterEpisodesCorrected();
             characterFromEpisodes.Should().BeEquivalentTo(characterFromEpisodesCorrected);
         }
+
+        [TestMethod]
+        public void Verify_One_Line_Character_Luke()
+        {
+
+
+            List<string> characterLuke = GetDatas.GetCharacterFriendLuke();
+            characterLuke.Should().HaveCount(1);
+            characterLuke[0].Should().Be("Leia Organa");
+        }
+
     }
 }

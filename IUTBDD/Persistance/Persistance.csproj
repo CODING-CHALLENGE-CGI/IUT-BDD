@@ -14,12 +14,15 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Scripts\Character.sql" />
+    <None Remove="Scripts\CharacterAlderaan - corrige.sql" />
+    <None Remove="Scripts\CharacterAlderaan.sql" />
     <None Remove="Scripts\CharactersEpisodeV - corrige.sql" />
     <None Remove="Scripts\CharactersEpisodeV.sql" />
     <None Remove="Scripts\HomePlanet - corrige.sql" />
     <None Remove="Scripts\HomePlanet.sql" />
     <None Remove="Scripts\NomsPersos - corrige.sql" />
     <None Remove="Scripts\NomsPersos.sql" />
+    <None Remove="~%24Tuto.docx" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="5.0.0" />
